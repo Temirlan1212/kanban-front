@@ -1,0 +1,163 @@
+<ng-template #navMobItem let-path="path" let-title="title" let-data="data">
+  <a routerLinkActive="active" [routerLink]="path" [ngClass]="data.class">
+    <div class="icon-wrapper">
+      <app-svg-icon class="icon" size="24px" [name]="data.icon"></app-svg-icon>
+      <span
+        class="notifications-indicator"
+        *ngIf="data.class === 'notification' && indicator"
+      ></span>
+    </div>
+    <span class="title" [textContent]="title | translate"></span>
+  </a>
+</ng-template>
+
+<ng-template #switchers let-placement="placement">
+  <div>
+    <div class="switcher">
+      <app-svg-icon class="icon" size="24px" name="lang"></app-svg-icon>
+      <span class="title">{{ "Language" | translate }}</span>
+    </div>
+
+    <app-menu
+      [placement]="placement"
+      [dark]="false"
+      (onChange)="langsOpened = $event"
+    >
+      <div class="languages">
+        <span
+          *ngFor="let lang of allLangs"
+          (click)="handleLangChange($event, lang.code)"
+        >
+          {{ lang.name | translate }}
+          <app-svg-icon
+            *ngIf="currentLang === lang.code"
+            size="14px"
+            name="check"
+          ></app-svg-icon>
+        </span>
+      </div>
+    </app-menu>
+
+    <app-tooltip
+      *ngIf="!langsOpened"
+      [placement]="placement"
+      [textContent]="'Language' | translate"
+    ></app-tooltip>
+  </div>
+</ng-template>
+
+<ng-template #navItem let-path="path" let-title="title" let-data="data">
+  <ng-container *ngIf="data?.class?.includes('divider-top')">
+    <div class="divider"></div>
+  </ng-container>
+  <a
+    [routerLinkActive]="!!data?.active ? 'active' : ''"
+    [routerLink]="path"
+    (click)="
+      activeNavItemPath === '/' + path ? handleNavClick($event, data) : ''
+    "
+    [ngClass]="data.class"
+    [class.pointerEventsNone]="title === 'GiproZem' || isChildRoute"
+  >
+    <div class="icon-wrapper">
+      <app-svg-icon
+        class="icon"
+        size="24px"
+        [name]="data.icon"
+        *ngIf="data.icon != null"
+      ></app-svg-icon>
+
+      <app-svg-icon
+        class="icon toggler"
+        [class.open]="!this.sidePanelService.get(data.path)"
+        size="20px"
+        [name]="'arrow-down'"
+        *ngIf="
+          data.icon != null &&
+          !!data.toggle &&
+          data.path &&
+          activeNavItemPath === '/' + path
+        "
+      ></app-svg-icon>
+
+      <span
+        class="notifications-indicator"
+        *ngIf="data.class === 'notification' && indicator"
+      ></span>
+    </div>
+    <img
+      [class]="data?.class ?? ''"
+      class="image"
+      [src]="'assets/images/' + data.image"
+      *ngIf="data.image != null"
+    />
+    <span class="title" [textContent]="title | translate"></span>
+    <app-tooltip
+      *ngIf="!opened && !!title"
+      placement="right"
+      [textContent]="title | translate"
+    ></app-tooltip>
+  </a>
+  <ng-container *ngIf="data?.class?.includes('divider-bottom')">
+    <div class="divider"></div>
+  </ng-container>
+</ng-template>
+
+<div class="mobile-menu" #menuContainer>
+  <div class="btn-left">
+    <button (click)="handleArrowLeftClick(menuContainer)">
+      <app-svg-icon class="icon arrow-left" size="16px" name="arrow-down">
+      </app-svg-icon>
+    </button>
+  </div>
+
+  <nav>
+    <ng-container
+      *ngFor="let route of mobileRoutes"
+      [ngTemplateOutlet]="navMobItem"
+      [ngTemplateOutletContext]="route"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="switchers"
+      [ngTemplateOutletContext]="{ placement: 'top' }"
+    ></ng-container>
+  </nav>
+
+  <div class="btn-right">
+    <button (click)="handleArrowRightClick(menuContainer)">
+      <app-svg-icon class="icon arrow-right" size="16px" name="arrow-down">
+      </app-svg-icon>
+    </button>
+  </div>
+</div>
+
+<div class="menu" [class.open]="opened">
+  <nav class="top">
+    <ng-container *ngFor="let route of topRoutes">
+      <ng-container
+        [ngTemplateOutlet]="navItem"
+        [ngTemplateOutletContext]="route"
+      ></ng-container>
+    </ng-container>
+  </nav>
+  <nav class="bottom">
+    <ng-container
+      *ngFor="let route of bottomRoutes"
+      [ngTemplateOutlet]="navItem"
+      [ngTemplateOutletContext]="route"
+    ></ng-container>
+
+    <ng-container
+      [ngTemplateOutlet]="switchers"
+      [ngTemplateOutletContext]="{ placement: 'right' }"
+    ></ng-container>
+
+    <button type="button" class="toggler" (click)="opened = !opened">
+      <app-svg-icon name="arrow-down" size="20"></app-svg-icon>
+    </button>
+  </nav>
+</div>
+
+<div class="content">
+  <ng-content></ng-content>
+</div>

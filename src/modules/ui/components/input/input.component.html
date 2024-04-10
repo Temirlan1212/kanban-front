@@ -1,0 +1,43 @@
+<app-svg-icon
+  size="14px"
+  class="left-icon"
+  *ngIf="leftIcon != null"
+  [name]="leftIcon"
+  (click)="handleLeftIconClick()"
+>
+</app-svg-icon>
+
+<input
+  #input
+  [type]="type"
+  [value]="value"
+  [min]="min"
+  [max]="max"
+  [step]="step"
+  [attr.pattern]="pattern"
+  [required]="required"
+  [disabled]="disabled"
+  [class.has-left-icon]="leftIcon"
+  [class.has-right-icon]="rightIcon"
+  (input)="handleInputChange($event)"
+/>
+
+<span
+  class="placeholder"
+  (click)="input.focus()"
+  [class.active]="value != null"
+  [class.required]="required"
+  [textContent]="placeholder"
+>
+</span>
+
+<app-svg-icon
+  size="18px"
+  class="right-icon"
+  [name]="rightIcon"
+  *ngIf="
+    rightIcon != null || (rightIcon === 'clear' && !disabled && value != null)
+  "
+  (click)="handleRightIconClick($event)"
+>
+</app-svg-icon>

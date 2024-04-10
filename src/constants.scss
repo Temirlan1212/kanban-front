@@ -1,0 +1,98 @@
+/*
+* Colors
+*/
+
+// Base
+$lightColor: #ffffff;
+$darkColor: #322c2c;
+$primaryColor: #1b55eb;
+$secondaryColor: #eeeff2;
+$successColor: #03aa49;
+$dangerColor: #e34645;
+$warningColor: #ffa500;
+$primaryBackgroundColor: #fff;
+$grayColor: #c7c7db;
+$iconColor: #1d1d1d;
+$disabledField: #c0c0c0;
+$fieldBorder: #c2c2c2;
+$fieldBorderRadius: 8px;
+
+// Sidenav
+$sideNavMenuBgColor: #eeeff2;
+$sideNavMenuItemHoverBgColor: #eeeff2;
+
+// Input
+$inputBorderColor: #c8c7c7;
+$inputActiveBorderColor: rgba(27, 85, 235, 0.48);
+
+// Card accordeon
+$cardAccordeonBorderRadius: 4px;
+
+// Table
+$tableHeaderBackgroundColor: #fff;
+$tableHeaderBorderColor: #dbdfec;
+$tableHeaderTextColor: #6b6f7b;
+$tableBodyBackgroundColor: #fff;
+$tableBodyTextColor: #171923;
+$tableBodyRowBorderColor: #d6d9dc;
+$tableBodyRowHoverBackgroundColor: #f5faff;
+// Other
+
+/*
+* Sizes
+*/
+
+// Base
+
+// Logo
+$logoWidth: 54px;
+$logoHeight: 54px;
+
+// Sidenav
+$sideNavMenuGap: 20px;
+$sideNavMenuWidth: 80px;
+$sideNavMenuOpenWidth: 250px;
+$sideNavMenuItemGap: 10px;
+$sideNavMenuItemPadding: 14px;
+$sideNavMenuItemIconMargin: 14px;
+
+// Side Panel
+$sidePanelContentWidth: 350px;
+
+// Input
+$inputBorderRadius: 4px;
+$inputPlaceholderTop: 30%;
+
+// Side dialog
+$sideDialogTitleVerticalMarginSize: 24px;
+$sideDialogVerticalPaddingSize: 24px;
+$sideDialogHorizontalPaddingSize: 20px;
+
+// Fields group
+$fieldsGroupButtonGap: 16px;
+$fieldsGroupContentPadding: 16px;
+
+// Other
+
+// Icon
+$iconSpinnerWidth: 100px;
+$iconSpinnerHeight: 100px;
+$iconMiniSpinnerWidth: 24px;
+$iconMiniSpinnerHeight: 24px;
+
+/*
+* Delays
+*/
+
+// Sidenav
+$sideNavTransitionDelay: 0.25s;
+
+// Fields group
+$fieldsGroupTransitionDelay: 0.25s;
+
+// Mobile
+$mobileBottomNavHeight: 80px;
+$mobileNavMarginBottom: 5px;
+
+//floating filter bar
+$floatingFilterBarLeft: 95px;

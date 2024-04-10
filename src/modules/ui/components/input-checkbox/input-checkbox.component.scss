@@ -1,0 +1,40 @@
+@import "constants";
+
+:host {
+  display: block;
+}
+
+.option {
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .checkbox-wrapper {
+    cursor: pointer;
+    color: $lightColor;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  label {
+    cursor: pointer;
+  }
+
+  .checkbox {
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 8%;
+      background-color: $lightColor;
+      border: 3px solid $lightColor;
+    }
+
+    &.active::before {
+      border: 3px solid $lightColor;
+      background-color: $successColor;
+    }
+  }
+}

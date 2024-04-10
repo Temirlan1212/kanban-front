@@ -1,0 +1,44 @@
+@import "./constants";
+
+$borderRadius: 4px;
+
+.tabs ul {
+  list-style-type: none;
+  overflow: hidden;
+  width: fit-content;
+  padding: 3px;
+  border-radius: $borderRadius;
+  background-color: $lightColor;
+  display: flex;
+}
+
+.tabs li {
+  float: left;
+  cursor: pointer;
+  padding: 10px 20px;
+  overflow-wrap: break-word;
+}
+
+.tabs li a {
+  display: block;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.tabs li.active {
+  background-color: $successColor;
+  color: $lightColor;
+  border-radius: $borderRadius;
+}
+
+.tabs li:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.tabs div {
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+  background-color: #ffffff;
+}

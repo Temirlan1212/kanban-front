@@ -1,0 +1,182 @@
+@import "constants";
+
+:host {
+  display: block;
+  overflow: auto;
+  min-height: auto;
+  margin: 10px 0;
+  border-radius: $fieldBorderRadius;
+  border: 1px solid $tableBodyRowBorderColor;
+
+  &:has(.dark) {
+    border: 1px solid $darkColor;
+  }
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    border-radius: 8px;
+    background-color: $lightColor;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $successColor;
+    border-radius: 5px;
+  }
+}
+
+table {
+  width: 100%;
+  font-weight: 400;
+  line-height: 16px;
+  border-collapse: collapse;
+  text-align: left;
+
+  &.nonwrap {
+    th,
+    td {
+      display: block;
+      max-width: 430px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  th,
+  td {
+    padding: 10px 5px;
+    min-height: 40px;
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+
+      button {
+        padding: 0;
+      }
+    }
+
+    &.mobile {
+      display: none;
+    }
+  }
+
+  &.border {
+    td {
+      border-bottom: 1px solid $tableBodyRowBorderColor;
+    }
+  }
+
+  thead {
+    height: 50px;
+    font-weight: 700;
+    background-color: $tableHeaderBackgroundColor;
+    color: $tableHeaderTextColor;
+
+    tr {
+      border-bottom: 1px solid $tableHeaderBorderColor;
+    }
+  }
+
+  tbody {
+    background-color: $tableBodyBackgroundColor;
+    color: $tableBodyTextColor;
+
+    tr {
+      &:hover {
+        background-color: $tableBodyRowHoverBackgroundColor;
+      }
+
+      &:last-child {
+        td {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  &.dark {
+    thead {
+      background-color: $darkColor;
+
+      tr {
+        border: none;
+      }
+    }
+
+    tbody {
+      background-color: transparent;
+      color: $lightColor;
+
+      tr:hover {
+        background-color: transparent !important;
+      }
+    }
+
+    th {
+      color: $lightColor;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  :host {
+    border: none;
+    border-radius: 0px;
+  }
+  table {
+    &.border {
+      td {
+        border: 1px solid $tableBodyRowBorderColor;
+      }
+    }
+  }
+  table thead {
+    display: none;
+  }
+  table thead tr {
+    display: contents;
+  }
+
+  table,
+  table tbody,
+  table tr,
+  table td {
+    display: block;
+    width: 100%;
+  }
+  table tr {
+    margin-bottom: 15px;
+  }
+  table td {
+    padding-left: 50%;
+    text-align: left;
+    position: relative;
+
+    &.actions {
+      justify-content: flex-start;
+      visibility: visible;
+    }
+
+    &.mobile {
+      display: block;
+    }
+
+    &.desktop {
+      display: none;
+    }
+  }
+  table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+}

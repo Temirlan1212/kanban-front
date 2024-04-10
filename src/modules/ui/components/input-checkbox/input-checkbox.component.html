@@ -1,0 +1,13 @@
+<div class="option">
+  <input
+    type="checkbox"
+    [name]="name"
+    [checked]="checked"
+    [disabled]="disabled"
+  />
+  <div class="checkbox-wrapper">
+    <label class="checkbox" [class.active]="checked"></label>
+
+    <label [textContent]="name | translate"></label>
+  </div>
+</div>
