@@ -145,7 +145,7 @@
   width: calc(100% - $sideNavMenuWidth);
   transition: all $sideNavTransitionDelay;
   overflow: auto;
-  box-shadow: -2px 0 20px $sideNavMenuBgColor;
+  box-shadow: -2px 0 20px $weakGrayColor;
 }
 
 .switcher {

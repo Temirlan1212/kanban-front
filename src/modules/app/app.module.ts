@@ -12,6 +12,7 @@ import { NotificationHostDirective } from '../ui/components/notification/notific
 import { SidenavComponent } from '../ui/components/sidenav/sidenav.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '../ui/services/language.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { LanguageService } from '../ui/services/language.service';
     SidenavComponent,
     NotificationHostDirective,
     HttpClientModule,
+    DragDropModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
