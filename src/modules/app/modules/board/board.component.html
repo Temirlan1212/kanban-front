@@ -1,3 +1,8 @@
+<app-side-panel>
+  <app-board-list></app-board-list>
+  <router-outlet></router-outlet>
+</app-side-panel>
+
 <div class="board container">
   <div class="board-wrapper">
     <div class="board-columns">
@@ -36,3 +41,10 @@
     </div>
   </div>
 </div>
+
+<app-toggle-button
+  #toggleBtn
+  (onClick)="sidePanelService.toggle()"
+  [isContentToggled]="sidePanelService.get()"
+  iconName="hamburger"
+></app-toggle-button>

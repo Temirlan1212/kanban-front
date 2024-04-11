@@ -5,6 +5,9 @@ import { IStore } from '../models/store.model';
 @Injectable({ providedIn: 'root' })
 export class StoreService {
   public readonly watch: Subject<IStore> = new Subject<IStore>();
+  public readonly storageNames = {
+    sidePanel: 'SidePanelCompoent',
+  };
 
   constructor() {}
 

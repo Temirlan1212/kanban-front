@@ -145,7 +145,7 @@ export class SidenavComponent implements OnChanges, OnDestroy {
   }
 
   handleNavClick(e: any, data: Record<string, any>) {
-    if (data?.['toggle'] && data?.['path']) {
+    if (data?.['toggle']) {
       e.stopPropagation();
       this.sidePanelService.set(
         !this.sidePanelService.get(data['path']),

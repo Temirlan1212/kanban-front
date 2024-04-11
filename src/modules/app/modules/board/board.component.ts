@@ -4,9 +4,10 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-
-import { Board } from './models/board.model';
-import { Column } from './models/column.model';
+import { Board } from './lib/models/board.model';
+import { Column } from './lib/models/column.model';
+import { StoreService } from 'src/modules/ui/services/store.service';
+import { SidePanelService } from 'src/modules/ui/services/side-panel.service';
 
 @Component({
   selector: 'app-board',
@@ -22,7 +23,10 @@ export class BoardComponent implements OnInit {
     new Column('Research', '32', ['Lorem ipsum', 'foo']),
   ]);
 
-  constructor() {}
+  constructor(
+    private store: StoreService,
+    public sidePanelService: SidePanelService
+  ) {}
 
   public ngOnInit(): void {}
 
@@ -49,6 +53,5 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     }
-    console.log(this.board);
   }
 }

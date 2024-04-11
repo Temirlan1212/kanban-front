@@ -22,7 +22,13 @@ const routes: Routes = [
   {
     title: 'Board',
     path: 'board',
-    data: { position: 'top', icon: 'list', active: true },
+    data: {
+      position: 'top',
+      icon: 'list',
+      panel: true,
+      toggle: true,
+      active: true,
+    },
     canActivate: [],
     loadChildren: () =>
       import('./modules/board/board.module').then((m) => m.BoardModule),
