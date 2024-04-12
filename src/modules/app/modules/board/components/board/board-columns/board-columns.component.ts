@@ -33,7 +33,7 @@ export class BoardColumnsComponent {
 
   public dropGrid(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.board, event.previousIndex, event.currentIndex);
-    console.log(this.board);
+    // console.log(this.board);
   }
 
   public drop(event: CdkDragDrop<string[]>): void {
