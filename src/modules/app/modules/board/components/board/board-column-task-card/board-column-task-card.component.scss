@@ -1,0 +1,46 @@
+@import "constants";
+
+:host {
+  width: 100%;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  .priority,
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .color {
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: $lightColor;
+      border: 1px solid rgba($darkColor, 0.4);
+    }
+  }
+}
+
+.footer {
+  .executors {
+    display: flex;
+    align-items: center;
+
+    .executor {
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      border: 1px solid rgba($darkColor, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $lightColor;
+      &:not(:first-child) {
+        margin-left: -10px;
+      }
+    }
+  }
+}

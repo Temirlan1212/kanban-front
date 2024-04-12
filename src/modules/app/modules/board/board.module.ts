@@ -15,6 +15,8 @@ import { BoardFormComponent } from './components/boards/board-form/board-form.co
 import { FormFieldComponent } from 'src/modules/ui/components/form-field/form-field.component';
 import { InputComponent } from 'src/modules/ui/components/input/input.component';
 import { LoadingComponent } from 'src/modules/ui/components/loading/loading.component';
+import { BoardColumnsComponent } from './components/board/board-columns/board-columns.component';
+import { BoardColumnTaskCardComponent } from './components/board/board-column-task-card/board-column-task-card.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { LoadingComponent } from 'src/modules/ui/components/loading/loading.comp
     BoardCreateComponent,
     BoardUpdateComponent,
     BoardFormComponent,
+    BoardColumnsComponent,
+    BoardColumnTaskCardComponent,
   ],
   imports: [
     CommonModule,

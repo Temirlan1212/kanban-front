@@ -2,44 +2,7 @@
   <router-outlet></router-outlet>
 </app-side-panel>
 
-<div class="board container">
-  <div class="board-wrapper">
-    <div class="board-columns">
-      <div
-        cdkDropList
-        cdkDropListOrientation="horizontal"
-        class="board-columns"
-        (cdkDropListDropped)="dropGrid($event)"
-      >
-        <div
-          cdkDragLockAxis="x"
-          class="board-column"
-          *ngFor="let column of board"
-          cdkDrag
-        >
-          <div class="column-title">
-            {{ column.name }}
-          </div>
-          <div
-            class="tasks-container"
-            id="{{ column.id }}"
-            [cdkDropListConnectedTo]="['21', '32', '36']"
-            cdkDropList
-            [cdkDropListData]="column.tasks"
-            (cdkDropListDropped)="drop($event)"
-          >
-            <div class="task" *ngFor="let item of column.tasks" cdkDrag>
-              {{ item }}
-            </div>
-          </div>
-          <button type="button" class="outlined create-task-column-btn">
-            <div>Добавить новую карточку</div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-board-columns></app-board-columns>
 
 <app-toggle-button
   #toggleBtn
