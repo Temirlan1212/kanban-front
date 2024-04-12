@@ -14,7 +14,7 @@
         <div
           cdkDragLockAxis="x"
           class="board-column"
-          *ngFor="let column of board.columns"
+          *ngFor="let column of board"
           cdkDrag
         >
           <div class="column-title">
@@ -23,7 +23,7 @@
           <div
             class="tasks-container"
             id="{{ column.id }}"
-            [cdkDropListConnectedTo]="['21', '32']"
+            [cdkDropListConnectedTo]="['21', '32', '36']"
             cdkDropList
             [cdkDropListData]="column.tasks"
             (cdkDropListDropped)="drop($event)"

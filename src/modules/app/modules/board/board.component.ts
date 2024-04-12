@@ -4,8 +4,6 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Board } from './lib/models/board.model';
-import { Column } from './lib/models/column.model';
 import { StoreService } from 'src/modules/ui/services/store.service';
 import { SidePanelService } from 'src/modules/ui/services/side-panel.service';
 
@@ -15,13 +13,18 @@ import { SidePanelService } from 'src/modules/ui/services/side-panel.service';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  public board: Board = new Board('Board', [
-    new Column('Ideas', '21', [
-      'Some random idea',
-      'This is another random idea',
-    ]),
-    new Column('Research', '32', ['Lorem ipsum', 'foo']),
-  ]);
+  public board = [
+    {
+      name: 'tim',
+      id: '21',
+      tasks: ['Some random idea', 'This is another random idea'],
+    },
+    {
+      name: 'tsdfim',
+      id: '32',
+      tasks: ['Some random iddsfea', 'This sdfis another random idea'],
+    },
+  ];
 
   constructor(
     private store: StoreService,
@@ -31,11 +34,7 @@ export class BoardComponent implements OnInit {
   public ngOnInit(): void {}
 
   public dropGrid(event: CdkDragDrop<string[]>): void {
-    moveItemInArray(
-      this.board.columns,
-      event.previousIndex,
-      event.currentIndex
-    );
+    moveItemInArray(this.board, event.previousIndex, event.currentIndex);
   }
 
   public drop(event: CdkDragDrop<string[]>): void {
@@ -53,6 +52,6 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     }
-    console.log(this.board.columns);
+    console.log(this.board);
   }
 }
