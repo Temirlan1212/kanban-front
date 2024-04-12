@@ -55,7 +55,7 @@
   flex-grow: 1;
   overflow-y: auto;
   min-height: 50px;
-  max-height: 800px;
+  // max-height: 800px;
   margin-bottom: 5px;
   padding: 5px 0;
   display: flex;
@@ -93,8 +93,4 @@
 .tasks-container.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   min-height: 50px;
-}
-
-app-side-panel {
-  z-index: 999;
 }

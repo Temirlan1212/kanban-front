@@ -70,6 +70,7 @@
     "editButton": "Редактировать слой",
     "deleteButton": "Удалить слой"
   },
+  "This field is required": "Это поле обязательное",
   "Delete contour": "Удаление контура",
   "Contour will be deleted, continue?": "Контур будет удален, продолжить?",
   "Yes": "Да",

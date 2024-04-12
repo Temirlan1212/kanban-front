@@ -1,0 +1,20 @@
+<form class="content" [formGroup]="form">
+  <app-form-field name="title" #title>
+    <app-input
+      type="text"
+      [placeholder]="'title' | translate"
+      formControlName="title"
+      [required]="title.required"
+    >
+    </app-input>
+
+    <span
+      class="field-error"
+      *ngIf="form.get('title')?.getError('error') != null"
+      [textContent]="form.get('title')?.getError('error') | translate"
+    ></span>
+  </app-form-field>
+  <div class="actions">
+    <ng-content select="[actions]"></ng-content>
+  </div>
+</form>

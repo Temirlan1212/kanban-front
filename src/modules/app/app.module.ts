@@ -13,6 +13,11 @@ import { SidenavComponent } from '../ui/components/sidenav/sidenav.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '../ui/services/language.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { StoreModule } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { boardListFeature } from './modules/board/lib/states/board-list/board-list.reducer';
+import { boardListEffects } from './modules/board/lib/states/board-list/board-list.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +39,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   ],
 
   providers: [
+    provideEffects(boardListEffects),
+    provideStore({
+      [boardListFeature.name]: boardListFeature.reducer,
+    }),
     {
       provide: HTTP_INTERCEPTORS,
       useExisting: ApiInterceptorService,

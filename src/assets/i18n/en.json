@@ -71,6 +71,7 @@
     "editButton": "Edit Layers",
     "deleteButton": "Remove Layers"
   },
+  "This field is required": "This field is required",
   "Delete contour": "Delete contour",
   "Contour will be deleted, continue?": "Contour will be deleted, continue?",
   "Yes": "Yes",

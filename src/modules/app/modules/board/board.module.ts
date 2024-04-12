@@ -6,10 +6,24 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SidePanelComponent } from 'src/modules/ui/components/side-panel/side-panel.component';
 import { ToggleButtonComponent } from 'src/modules/ui/components/toggle-button/toggle-button.component';
-import { BoardListComponent } from './components/board-list/board-list.component';
+import { BoardListComponent } from './components/boards/board-list/board-list.component';
+import { SvgIconComponent } from 'src/modules/ui/components/svg-icon/svg-icon.component';
+import { BoardCreateComponent } from './components/boards/board-create/board-create.component';
+import { BoardUpdateComponent } from './components/boards/board-update/board-update.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BoardFormComponent } from './components/boards/board-form/board-form.component';
+import { FormFieldComponent } from 'src/modules/ui/components/form-field/form-field.component';
+import { InputComponent } from 'src/modules/ui/components/input/input.component';
+import { LoadingComponent } from 'src/modules/ui/components/loading/loading.component';
 
 @NgModule({
-  declarations: [BoardComponent, BoardListComponent],
+  declarations: [
+    BoardComponent,
+    BoardListComponent,
+    BoardCreateComponent,
+    BoardUpdateComponent,
+    BoardFormComponent,
+  ],
   imports: [
     CommonModule,
     BoardRoutingModule,
@@ -17,6 +31,12 @@ import { BoardListComponent } from './components/board-list/board-list.component
     DragDropModule,
     SidePanelComponent,
     ToggleButtonComponent,
+    SvgIconComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    FormFieldComponent,
+    InputComponent,
+    LoadingComponent,
   ],
   providers: [TranslatePipe],
 })

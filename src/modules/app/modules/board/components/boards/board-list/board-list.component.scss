@@ -1,0 +1,43 @@
+@import "constants";
+
+$indent: 0 20px;
+
+nav {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 5px;
+  max-height: 87dvh;
+  overflow: auto;
+  color: $iconColor;
+
+  .board {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 8px;
+
+    &:hover,
+    &.active {
+      background-color: rgba($sideNavMenuItemHoverBgColor, 0.5);
+      color: $darkColor;
+    }
+
+    span {
+      font-size: 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      button {
+        padding: 10px;
+      }
+    }
+  }
+}

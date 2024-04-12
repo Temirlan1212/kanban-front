@@ -1,0 +1,42 @@
+<div class="sidebar-head">
+  <div class="actions">
+    <button type="button" class="navigate" routerLink="../..">
+      <app-svg-icon name="left-arrow-long" size="22"></app-svg-icon>
+    </button>
+    <button
+      type="button"
+      class="navigate"
+      routerLink="/board/create"
+      [class.loading]="(status$ | async) == 'loading'"
+      queryParamsHandling="merge"
+    >
+      <app-svg-icon name="plus" size="17"></app-svg-icon>
+    </button>
+  </div>
+  <h4 class="title">{{ "Board list" | translate }}</h4>
+</div>
+
+<nav *ngIf="boardList$ | async as boardList">
+  <div
+    (click)="handleBoardSelect(item.id)"
+    class="board"
+    *ngFor="let item of boardList.data"
+    [class.active]="id == item.id"
+  >
+    <span>
+      {{ item.title }}
+    </span>
+
+    <div class="actions">
+      <button (click)="handleDelete(item.id)">
+        <app-svg-icon name="delete" size="15"></app-svg-icon>
+      </button>
+      <button
+        [routerLink]="'/board/update/' + item.id"
+        queryParamsHandling="merge"
+      >
+        <app-svg-icon name="edit" size="15"></app-svg-icon>
+      </button>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,24 @@
+<div class="sidebar-head">
+  <div class="actions">
+    <button
+      type="button"
+      class="navigate"
+      routerLink="../.."
+      queryParamsHandling="merge"
+    >
+      <app-svg-icon name="left-arrow-long" size="22"></app-svg-icon>
+    </button>
+  </div>
+  <h4 class="title">{{ "Create" | translate }}</h4>
+</div>
+
+<app-board-form #form>
+  <button
+    type="button"
+    actions
+    (click)="handleSave(form)"
+    [class.loading]="loading"
+  >
+    {{ "Create" | translate }}
+  </button>
+</app-board-form>

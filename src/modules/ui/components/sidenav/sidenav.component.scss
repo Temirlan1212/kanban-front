@@ -13,9 +13,9 @@
   transition: width $sideNavTransitionDelay;
   padding: 5px 0 0 0;
 
-  .pointerEventsNone {
-    pointer-events: none;
-  }
+  // .pointerEventsNone {
+  //   pointer-events: none;
+  // }
 
   &.open {
     width: $sideNavMenuOpenWidth;

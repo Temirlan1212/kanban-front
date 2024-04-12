@@ -53,5 +53,6 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     }
+    console.log(this.board.columns);
   }
 }

@@ -1,0 +1,25 @@
+<div class="sidebar-head">
+  <div class="actions">
+    <button
+      type="button"
+      class="navigate"
+      routerLink="../.."
+      [class.loading]="findOneLoading"
+      queryParamsHandling="merge"
+    >
+      <app-svg-icon name="left-arrow-long" size="22"></app-svg-icon>
+    </button>
+  </div>
+  <h4 class="title">{{ "Board update" | translate }}</h4>
+</div>
+
+<app-board-form #form [value]="board">
+  <button
+    type="button"
+    actions
+    (click)="handleSave(form)"
+    [class.loading]="saveLoading"
+  >
+    {{ "Update" | translate }}
+  </button>
+</app-board-form>
