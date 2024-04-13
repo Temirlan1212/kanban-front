@@ -4,14 +4,25 @@ import {
   ApiResponse,
   ApiResponseWithPagination,
 } from '../models/data-access.model';
-import { ITask } from '../models/task.model';
+import { ITask, ITaskQueryParams } from '../models/task.model';
 
 export class TaskApi {
   constructor(private http: HttpClient) {}
 
-  async findAll() {
+  async findAll({
+    page,
+    perPage,
+    title,
+    createdAt,
+  }: Partial<ITaskQueryParams>) {
+    const params = new URLSearchParams();
+    perPage && params.append('perPage', String(perPage));
+    page && params.append('page', String(page));
+    title && params.append('title', String(title));
+    createdAt && params.append('createdAt', String(createdAt));
+
     return await firstValueFrom(
-      this.http.get<ApiResponseWithPagination<ITask[]>>(`task`)
+      this.http.get<ApiResponseWithPagination<ITask[]>>(`task?${params}`)
     );
   }
 

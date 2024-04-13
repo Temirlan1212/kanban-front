@@ -34,13 +34,27 @@ const routes: Routes = [
       import('./modules/board/board.module').then((m) => m.BoardModule),
   },
   {
-    title: 'About system',
-    path: 'about',
-    data: { position: 'top', icon: 'info-circle', active: true },
+    title: 'All tasks',
+    path: 'task',
+    data: {
+      position: 'top',
+      icon: 'dictionary',
+      panel: true,
+      toggle: true,
+      active: true,
+    },
     canActivate: [],
     loadChildren: () =>
-      import('./modules/about/about.module').then((m) => m.AboutModule),
+      import('./modules/task/task.module').then((m) => m.TaskModule),
   },
+  // {
+  //   title: 'About system',
+  //   path: 'about',
+  //   data: { position: 'top', icon: 'info-circle', active: true },
+  //   canActivate: [],
+  //   loadChildren: () =>
+  //     import('./modules/about/about.module').then((m) => m.AboutModule),
+  // },
   {
     title: 'NotFoundPage',
     path: '**',

@@ -39,7 +39,7 @@ export class ApiInterceptorService implements HttpInterceptor {
     }
 
     const apiRequest = request.clone({
-      url: `${environment.apiUrl}/${request.url}/`,
+      url: `${environment.apiUrl}/${request.url}`,
       headers,
     });
 

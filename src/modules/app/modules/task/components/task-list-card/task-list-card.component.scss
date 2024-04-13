@@ -1,0 +1,66 @@
+@import "constants";
+
+:host {
+  width: 100%;
+  position: relative;
+}
+
+.card {
+  border: 1px solid rgba($weakGrayColor, 0.6);
+  background-color: rgba($weakGrayColor, 0.4);
+  border-radius: 10px;
+  padding: 10px;
+
+  &:hover {
+    border: 1px solid rgba($weakGrayColor, 1);
+  }
+}
+
+.actions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 5px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  .priority,
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .color {
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: $lightColor;
+      border: 1px solid rgba($darkColor, 0.4);
+    }
+  }
+}
+
+.footer {
+  .executors {
+    display: flex;
+    align-items: center;
+
+    .executor {
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      border: 1px solid rgba($darkColor, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $lightColor;
+      &:not(:first-child) {
+        margin-left: -10px;
+      }
+    }
+  }
+}

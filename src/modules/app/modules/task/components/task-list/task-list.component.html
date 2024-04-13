@@ -1,0 +1,40 @@
+<div class="head">
+  <h4 class="title">Список всех задач</h4>
+</div>
+
+<div class="filter">
+  <app-input
+    rightIcon=""
+    placeholder=""
+    (onChangeEmitWithDebounce)="handleSearchByTitle($event)"
+  />
+  <button
+    class="navigate"
+    *ngIf="queries.createdAt === 'asc'"
+    (click)="handleSortByCreatedAt('desc')"
+  >
+    desc
+  </button>
+  <button
+    class="navigate"
+    *ngIf="queries.createdAt === 'desc'"
+    (click)="handleSortByCreatedAt('asc')"
+  >
+    asc
+  </button>
+</div>
+
+<div class="tasks">
+  <app-task-list-card *ngFor="let task of tasks$ | async" [value]="task" />
+  <div class="no-data" *ngIf="((tasks$ | async) || []).length < 1">
+    Нету данных
+  </div>
+</div>
+
+<app-paginator
+  *ngIf="((tasks$ | async) || []).length > 0"
+  [currentPage]="(paginationMeta$ | async)?.currentPage || 0"
+  [totalItems]="(paginationMeta$ | async)?.total || 0"
+  [itemsPerPage]="(paginationMeta$ | async)?.perPage || 0"
+  (onPageChange)="handlePaginationPageChange($event)"
+></app-paginator>

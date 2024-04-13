@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="head">
+    <div class="actions">
+      <ng-content select="[actions]"></ng-content>
+    </div>
+
+    <div class="priority">
+      <div class="color"></div>
+      <span>{{ dictionary.getPriorityField(task.priority, "label") }}</span>
+    </div>
+
+    <div class="status">
+      <div class="color"></div>
+      <span>{{ dictionary.getStatusField(task.priority, "label") }}</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <h5 class="title">{{ task?.title || "" }}</h5>
+  </div>
+
+  <div class="footer">
+    <div class="executors">
+      <div
+        *ngFor="let id of executorsConverter(task.executors)"
+        class="executor"
+      >
+        {{ dictionary.getExecutorField(id, "label") }}
+      </div>
+    </div>
+  </div>
+</div>
