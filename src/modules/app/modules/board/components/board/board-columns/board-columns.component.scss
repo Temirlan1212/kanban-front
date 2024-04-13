@@ -40,6 +40,8 @@
   gap: 10px;
   overflow-x: auto;
   height: 85dvh;
+  overflow-y: hidden;
+
   @media only screen and (min-width: 992px) {
     max-width: calc(100vw - ($sidePanelContentWidth + ($sideNavMenuWidth * 2)));
   }
@@ -95,7 +97,7 @@
   flex-grow: 1;
   overflow-y: auto;
   min-height: 50px;
-  max-height: 800px;
+  max-height: 550px;
   margin-bottom: 5px;
   padding: 5px 0;
   display: flex;

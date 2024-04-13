@@ -17,6 +17,7 @@ import { InputComponent } from 'src/modules/ui/components/input/input.component'
 import { LoadingComponent } from 'src/modules/ui/components/loading/loading.component';
 import { BoardColumnsComponent } from './components/board/board-columns/board-columns.component';
 import { BoardColumnTaskCardComponent } from './components/board/board-column-task-card/board-column-task-card.component';
+import { SkeletonComponent } from 'src/modules/ui/components/skeleton/skeleton.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { BoardColumnTaskCardComponent } from './components/board/board-column-ta
     FormFieldComponent,
     InputComponent,
     LoadingComponent,
+    SkeletonComponent,
   ],
   providers: [TranslatePipe],
 })

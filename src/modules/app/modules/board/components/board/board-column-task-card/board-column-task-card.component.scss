@@ -2,6 +2,19 @@
 
 :host {
   width: 100%;
+  position: relative;
+}
+
+app-skeleton {
+  padding: 0 !important;
+}
+
+.actions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 5px;
 }
 
 .head {

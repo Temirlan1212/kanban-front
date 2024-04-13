@@ -2,8 +2,12 @@ import { Component, HostBinding, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SidePanelService } from 'src/modules/ui/services/side-panel.service';
 import { BoardColumnService } from '../../../lib/services/board.service';
-import { IBoardColumns } from 'src/modules/api/models/boards.model';
+import {
+  IBoardColumn,
+  IBoardColumns,
+} from 'src/modules/api/models/boards.model';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { ITask } from 'src/modules/api/models/task.model';
 
 @Component({
   selector: 'app-board-columns',
@@ -27,6 +31,7 @@ export class BoardColumnsComponent {
       this.activeBoardId = activeBoardId;
       await this.boardColumnService.getColumns(activeBoardId);
     });
+
     this.collapsed = this.sidePanelService.get();
     this.sidePanelService.watch((v) => (this.collapsed = v));
   }
@@ -56,5 +61,23 @@ export class BoardColumnsComponent {
   public async handleDropGrid(boards: CdkDragDrop<string[]>) {
     if (!this.activeBoardId) return;
     this.boardColumnService.dropGrid(boards, this.activeBoardId);
+  }
+
+  public async handleDropGridItem(boards: CdkDragDrop<string[]>) {
+    if (!this.activeBoardId) return;
+    this.boardColumnService.dropTask(boards, this.activeBoardId);
+  }
+
+  public async handleAddTask(columnId: IBoardColumn['id']) {
+    if (!this.activeBoardId) return;
+    this.boardColumnService.addTask(this.activeBoardId, columnId);
+  }
+
+  public async handleRemoveTask(
+    columnId: IBoardColumn['id'],
+    taskId: ITask['id']
+  ) {
+    if (!this.activeBoardId) return;
+    this.boardColumnService.removeTask(this.activeBoardId, columnId, taskId);
   }
 }

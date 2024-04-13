@@ -48,17 +48,29 @@
             <div
               class="tasks-container"
               id="{{ column.id }}"
-              [cdkDropListConnectedTo]="['21', '32']"
+              [cdkDropListConnectedTo]="boardColumnService.getColumnsIds()"
               cdkDropList
               [cdkDropListData]="column.tasksIds"
-              (cdkDropListDropped)="boardColumnService.drop($event)"
+              (cdkDropListDropped)="handleDropGridItem($event)"
             >
               <div class="task" *ngFor="let item of column.tasksIds" cdkDrag>
-                <app-board-column-task-card [value]="item">
+                <app-board-column-task-card [taskId]="item">
+                  <button
+                    type="button"
+                    class="navigate"
+                    actions
+                    (click)="handleRemoveTask(column.id, item)"
+                  >
+                    <app-svg-icon name="delete" size="13"></app-svg-icon>
+                  </button>
                 </app-board-column-task-card>
               </div>
             </div>
-            <button type="button" class="outlined create-task-column-btn">
+            <button
+              type="button"
+              class="outlined create-task-column-btn"
+              (click)="handleAddTask(column.id)"
+            >
               <div>Добавить новую карточку</div>
             </button>
           </div>

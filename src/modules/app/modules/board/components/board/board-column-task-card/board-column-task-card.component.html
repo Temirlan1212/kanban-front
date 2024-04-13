@@ -1,29 +1,43 @@
 <!-- <p>board-column-task-card works!</p> -->
 
-<div class="head">
-  <div class="priority">
-    <div class="color"></div>
-    <span>important</span>
+<app-skeleton
+  style="padding: 0 10px"
+  [width]="'100%'"
+  [height]="'105px'"
+  [borderRadius]="'10px'"
+  *ngIf="(status$ | async) === 'loading'"
+></app-skeleton>
+
+<div class="card" *ngIf="(status$ | async) !== 'loading'">
+  <div class="head">
+    <div class="actions">
+      <ng-content select="[actions]"></ng-content>
+    </div>
+
+    <div class="priority">
+      <div class="color"></div>
+      <span>important</span>
+    </div>
+
+    <div class="status">
+      <div class="color"></div>
+      <span>progress</span>
+    </div>
   </div>
 
-  <div class="status">
-    <div class="color"></div>
-    <span>progress</span>
+  <div class="content">
+    <h5 class="title">{{ task?.id || "" }}</h5>
   </div>
-</div>
 
-<div class="content">
-  <h5 class="title">{{ value }}</h5>
-</div>
-
-<div class="footer">
-  <div class="executors">
-    <div class="executor">u</div>
-    <div class="executor">u</div>
-    <div class="executor">u</div>
-    <div class="executor">u</div>
-    <div class="executor">u</div>
-    <div class="executor">u</div>
-    <div class="executor">+4</div>
+  <div class="footer">
+    <div class="executors">
+      <div class="executor">u</div>
+      <div class="executor">u</div>
+      <div class="executor">u</div>
+      <div class="executor">u</div>
+      <div class="executor">u</div>
+      <div class="executor">u</div>
+      <div class="executor">+4</div>
+    </div>
   </div>
 </div>

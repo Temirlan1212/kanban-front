@@ -11,6 +11,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { ITask } from 'src/modules/api/models/task.model';
 
 export const boardInitialColumnState: IBoardColumn = {
   id: String(Date.now()),
@@ -30,8 +31,12 @@ export class BoardColumnService {
   public readonly columns$: BehaviorSubject<IBoardColumns['columns']> =
     new BehaviorSubject<IBoardColumns['columns']>([]);
 
-  async getStateColumns() {
+  getStateColumns() {
     return this.columns$.value;
+  }
+
+  getColumnsIds() {
+    return this.columns$.value.map((column) => column.id);
   }
 
   async getColumns(id: IBoardColumns['id']) {
@@ -46,14 +51,14 @@ export class BoardColumnService {
 
   public async dropGrid(event: CdkDragDrop<string[]>, id: IBoardColumns['id']) {
     moveItemInArray(
-      await this.getStateColumns(),
+      this.getStateColumns(),
       event.previousIndex,
       event.currentIndex
     );
-    this.updateColumns(await this.getStateColumns(), id);
+    this.updateColumns(this.getStateColumns(), id);
   }
 
-  public drop(event: CdkDragDrop<string[]>): void {
+  public dropTask(event: CdkDragDrop<string[]>, id: IBoardColumns['id']): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -68,6 +73,7 @@ export class BoardColumnService {
         event.currentIndex
       );
     }
+    this.updateColumns(this.getStateColumns(), id);
   }
 
   async updateColumns(
@@ -90,7 +96,7 @@ export class BoardColumnService {
     id: IBoardColumns['id'],
     columnId: IBoardColumn['id']
   ) {
-    const value = await this.getStateColumns();
+    const value = this.getStateColumns();
     const newValue = value.map((item) => {
       if (item.id != columnId) return item;
       return { ...item, title: input } as IBoardColumn;
@@ -99,7 +105,7 @@ export class BoardColumnService {
   }
 
   async addColumn(id: IBoardColumns['id']) {
-    const value = await this.getStateColumns();
+    const value = this.getStateColumns();
     const newValue = [
       ...value,
       { ...boardInitialColumnState, id: String(Date.now()) },
@@ -112,9 +118,62 @@ export class BoardColumnService {
     id: IBoardColumns['id'],
     boardId: IBoardColumns['boardId']
   ) {
-    const value = await this.getStateColumns();
+    const value = this.getStateColumns();
     const filteredValue = value.filter((item) => item.id !== id);
     this.columns$.next(filteredValue);
     this.updateColumns(filteredValue, boardId);
+  }
+
+  async addTask(
+    boardId: IBoardColumns['boardId'],
+    columnId: IBoardColumn['id']
+  ) {
+    try {
+      this.status$.next('loading');
+      const res = await this.api.taskApi.create({
+        deadline: '',
+        executors: [],
+        priority: '',
+        status: '',
+        title: '',
+      });
+      if (res.ok) {
+        const id = res.result.id;
+        const columns = this.getStateColumns();
+        const newColumns = columns.map((column) => {
+          if (column.id == columnId) column.tasksIds.unshift(id);
+          return column;
+        });
+        this.columns$.next(newColumns);
+        this.updateColumns(newColumns, boardId);
+      }
+    } finally {
+      this.status$.next('loaded');
+    }
+  }
+
+  async removeTask(
+    boardId: IBoardColumns['boardId'],
+    columnId: IBoardColumn['id'],
+    taskId: ITask['id']
+  ) {
+    try {
+      this.status$.next('loading');
+      const res = await this.api.taskApi.delete(taskId);
+      if (res.ok) {
+        const columns = this.getStateColumns();
+        const newColumns = columns.map((column) => {
+          if (column.id != columnId) return column;
+          return {
+            ...column,
+            tasksIds: column.tasksIds.filter((id) => id != taskId),
+          } as IBoardColumn;
+        });
+        this.columns$.next(newColumns);
+        this.updateColumns(newColumns, boardId);
+      }
+    } finally {
+      this.status$.next('loaded');
+    }
   }
 }
