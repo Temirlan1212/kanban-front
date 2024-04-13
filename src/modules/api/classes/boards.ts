@@ -23,7 +23,7 @@ export class BoardsApi {
 
   async create(data: IBoard) {
     return await firstValueFrom(
-      this.http.post<ApiResponseWithPagination<IBoard>>(`boards`, {
+      this.http.post<ApiResponse<IBoard>>(`boards`, {
         title: data.title,
       })
     );

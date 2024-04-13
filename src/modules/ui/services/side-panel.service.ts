@@ -13,17 +13,8 @@ export class SidePanelService {
       if (event instanceof RoutesRecognized) {
         const config = event.state.root.firstChild?.routeConfig;
         let url = event.url;
-        const isLastParamNan = isNaN(
-          Number(url.split('/')[url.split('/').length - 1])
-        );
 
-        if (!isLastParamNan)
-          url = url
-            .split('/')
-            .slice(0, url.split('/').length - 1)
-            .join('/');
-
-        this.activeNavItemPath = url ?? null;
+        this.activeNavItemPath = config?.path ?? url ?? null;
         if (!config?.data?.['toggle']) {
           this.set(false);
         } else {

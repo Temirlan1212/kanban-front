@@ -1,5 +1,26 @@
 @import "constants";
 
+:host {
+  width: 100%;
+  &.collapsed {
+    .board-columns {
+      max-width: 100% !important;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .board {
   display: flex;
   flex-direction: column;
@@ -13,10 +34,18 @@
   flex-grow: 1;
   overflow-x: auto;
 }
+
 .board-columns {
   display: flex;
-  flex-grow: 1;
   gap: 10px;
+  overflow-x: auto;
+  height: 85dvh;
+  @media only screen and (min-width: 992px) {
+    max-width: calc(100vw - ($sidePanelContentWidth + ($sideNavMenuWidth * 2)));
+  }
+  @media only screen and (max-width: 992px) {
+    max-width: 100%;
+  }
 }
 
 .board-column {
@@ -24,25 +53,42 @@
   flex-direction: column;
   flex-grow: 1;
   flex-basis: 0;
-  max-width: 300px;
+  width: 300px;
+  min-width: 300px;
   padding: 15px;
   border-radius: 10px;
   border: 1px solid $weakGrayColor;
   height: fit-content;
+  cursor: grab;
   .create-task-column-btn {
     padding: 10px;
     border: 1px solid rgba($darkColor, 0.3);
+  }
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    .column-title {
+      font-size: 20px;
+      text-transform: uppercase;
+      app-input {
+        ::ng-deep {
+          input {
+            padding: 8px;
+            border: none;
+            background-color: rgba($weakGrayColor, 1);
+          }
+        }
+      }
+    }
   }
 }
 
 .board-column:not(:first-child) {
   margin-left: 0;
-}
-
-.column-title {
-  font-size: 20px;
-  text-transform: uppercase;
-  margin-bottom: 20px;
 }
 
 .tasks-container {

@@ -37,7 +37,9 @@ export class BoardUpdateComponent implements OnInit {
       this.saveLoading = true;
       this.api.boards
         .update(value, this.id)
-        .then(() => this.router.navigate(['..']))
+        .then(() =>
+          this.router.navigate(['..'], { queryParamsHandling: 'merge' })
+        )
         .catch((err: any) => {
           this.messages.error(err?.statusText || err?.message);
         })

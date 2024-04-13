@@ -1,37 +1,67 @@
-<div class="board container">
-  <div class="board-wrapper">
-    <div class="board-columns">
-      <div
-        cdkDropList
-        cdkDropListOrientation="horizontal"
-        class="board-columns"
-        (cdkDropListDropped)="dropGrid($event)"
-      >
+<div class="container">
+  <div class="head">
+    <button (click)="handleAddColumn()">add column</button>
+    <button [class.loading]="(status$ | async) == 'loading'">
+      {{ (status$ | async) == "loaded" ? "saved" : "error" }}
+    </button>
+  </div>
+
+  <div class="board">
+    <div class="board-wrapper">
+      <div class="board-columns">
         <div
-          cdkDragLockAxis="x"
-          class="board-column"
-          *ngFor="let column of board"
-          cdkDrag
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          class="board-columns"
+          (cdkDropListDropped)="handleDropGrid($event)"
         >
-          <div class="column-title">
-            {{ column.name }}
-          </div>
           <div
-            class="tasks-container"
-            id="{{ column.id }}"
-            [cdkDropListConnectedTo]="['21', '32', '36']"
-            cdkDropList
-            [cdkDropListData]="column.tasks"
-            (cdkDropListDropped)="drop($event)"
+            cdkDragLockAxis="x"
+            class="board-column"
+            *ngFor="let column of columns$ | async"
+            cdkDrag
           >
-            <div class="task" *ngFor="let item of column.tasks" cdkDrag>
-              <app-board-column-task-card [value]="item">
-              </app-board-column-task-card>
+            <div class="head">
+              <div class="column-title">
+                <!-- {{ column.title }} -->
+                <app-input
+                  [value]="column.title"
+                  rightIcon=""
+                  placeholder=""
+                  (onChangeEmitWithDebounce)="
+                    handleUpdateColumnTitle($event, column.id)
+                  "
+                />
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  class="navigate"
+                  (click)="handleRemoveColumn(column.id)"
+                >
+                  <app-svg-icon name="delete" size="15"></app-svg-icon>
+                </button>
+              </div>
             </div>
+
+            <div
+              class="tasks-container"
+              id="{{ column.id }}"
+              [cdkDropListConnectedTo]="['21', '32']"
+              cdkDropList
+              [cdkDropListData]="column.tasksIds"
+              (cdkDropListDropped)="boardColumnService.drop($event)"
+            >
+              <div class="task" *ngFor="let item of column.tasksIds" cdkDrag>
+                <app-board-column-task-card [value]="item">
+                </app-board-column-task-card>
+              </div>
+            </div>
+            <button type="button" class="outlined create-task-column-btn">
+              <div>Добавить новую карточку</div>
+            </button>
           </div>
-          <button type="button" class="outlined create-task-column-btn">
-            <div>Добавить новую карточку</div>
-          </button>
         </div>
       </div>
     </div>

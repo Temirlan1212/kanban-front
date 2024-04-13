@@ -12,6 +12,7 @@ import {
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { NgIf, NgStyle } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
 
 export type InputType = 'text' | 'number' | 'password' | 'email' | 'tel';
 
@@ -44,6 +45,10 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
   @Input() disabled: boolean = false;
   @Output() leftIconClick = new EventEmitter<void>();
   @Output() validity = new EventEmitter<boolean>();
+  private inputChangeSubject = new Subject<string | null>();
+  @Output() onChangeEmitWithDebounce = this.inputChangeSubject.pipe(
+    debounceTime(300)
+  );
 
   private onChange: Function = () => null;
   private onTouched: Function = () => null;
@@ -54,6 +59,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value']) this.onChange(this.value);
     if (changes['type'] != null && this.pattern == null) {
       switch (changes['type'].currentValue) {
         case 'email':
@@ -84,6 +90,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
       this.inputElement.nativeElement.value = '';
       this.value = null;
       this.onChange(this.value);
+      this.inputChangeSubject.next(this.value);
     }
     return;
   }
@@ -102,6 +109,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
     }
 
     this.onChange(this.value);
+    this.inputChangeSubject.next(this.value);
     this.onTouched();
     this.onValidity();
   }

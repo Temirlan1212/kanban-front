@@ -19,6 +19,10 @@ export class BoardListComponent implements OnInit {
 
   handleDelete(id: IBoard['id']) {
     this.boardListFacade.deleteBoard(id);
+    this.boardList$.subscribe((v) => {
+      const id = v.data?.[0]?.id;
+      if (id) this.handleBoardSelect(id);
+    });
   }
 
   handleBoardSelect(id: IBoard['id']) {
