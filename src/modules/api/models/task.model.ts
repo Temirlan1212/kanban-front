@@ -3,6 +3,6 @@ export interface ITask {
   status: string;
   deadline: string;
   priority: string;
-  executors: string[];
+  executors: string;
   id: string;
 }

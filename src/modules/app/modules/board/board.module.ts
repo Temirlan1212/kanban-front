@@ -18,6 +18,11 @@ import { LoadingComponent } from 'src/modules/ui/components/loading/loading.comp
 import { BoardColumnsComponent } from './components/board/board-columns/board-columns.component';
 import { BoardColumnTaskCardComponent } from './components/board/board-column-task-card/board-column-task-card.component';
 import { SkeletonComponent } from 'src/modules/ui/components/skeleton/skeleton.component';
+import { TaskFormComponent } from '../task/components/task-form/task-form.component';
+import { InputSelectComponent } from 'src/modules/ui/components/input-select/input-select.component';
+import { DatePickerComponent } from 'src/modules/ui/components/date-picker/date-picker.component';
+import { QuestionDialogComponent } from 'src/modules/ui/components/question-dialog/question-dialog.component';
+import { DropDialogComponent } from 'src/modules/ui/components/drop-dialog/drop-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +33,12 @@ import { SkeletonComponent } from 'src/modules/ui/components/skeleton/skeleton.c
     BoardFormComponent,
     BoardColumnsComponent,
     BoardColumnTaskCardComponent,
+    TaskFormComponent,
   ],
   imports: [
+    DropDialogComponent,
+    QuestionDialogComponent,
+    DatePickerComponent,
     CommonModule,
     BoardRoutingModule,
     TranslateModule,
@@ -43,6 +52,7 @@ import { SkeletonComponent } from 'src/modules/ui/components/skeleton/skeleton.c
     InputComponent,
     LoadingComponent,
     SkeletonComponent,
+    InputSelectComponent,
   ],
   providers: [TranslatePipe],
 })

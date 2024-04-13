@@ -12,6 +12,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { ITask } from 'src/modules/api/models/task.model';
+import { taskInitialState } from './board-task.service';
 
 export const boardInitialColumnState: IBoardColumn = {
   id: String(Date.now()),
@@ -108,7 +109,7 @@ export class BoardColumnService {
     const value = this.getStateColumns();
     const newValue = [
       ...value,
-      { ...boardInitialColumnState, id: String(Date.now()) },
+      { ...boardInitialColumnState, id: String(Date.now()), tasksIds: [] },
     ];
     this.columns$.next(newValue);
     this.updateColumns(newValue, id);
@@ -130,13 +131,8 @@ export class BoardColumnService {
   ) {
     try {
       this.status$.next('loading');
-      const res = await this.api.taskApi.create({
-        deadline: '',
-        executors: [],
-        priority: '',
-        status: '',
-        title: '',
-      });
+      const res = await this.api.taskApi.create(taskInitialState);
+
       if (res.ok) {
         const id = res.result.id;
         const columns = this.getStateColumns();

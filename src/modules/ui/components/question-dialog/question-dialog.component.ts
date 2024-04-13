@@ -24,6 +24,7 @@ export class QuestionDialogComponent implements OnInit {
   @Input() title = 'Подтвердить действие';
   @Input() submitText: string = 'Yes';
   @Input() cancelText: string = 'No';
+  @Input() submitLoading: boolean = false;
 
   @HostBinding('class.info')
   @Input()

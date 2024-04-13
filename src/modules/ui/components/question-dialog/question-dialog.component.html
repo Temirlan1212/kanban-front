@@ -34,9 +34,7 @@
       *ngIf="isInfo"
     ></app-svg-icon>
 
-    <span>
-      <ng-content></ng-content>
-    </span>
+    <ng-content></ng-content>
   </div>
   <div class="footer">
     <button
@@ -50,6 +48,7 @@
       class="btn btn-submit"
       [textContent]="submitText | translate"
       (click)="handleSubmitClick()"
+      [class.loading]="submitLoading"
     ></button>
   </div>
 </dialog>

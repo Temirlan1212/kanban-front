@@ -4,25 +4,25 @@ import { ApiService } from 'src/modules/api/api.service';
 import { LoadingStatus } from 'src/modules/api/models/data-access.model';
 import { ITask } from 'src/modules/api/models/task.model';
 
-export const taskInitialState: ITask = {
-  title: '',
-  status: '',
-  deadline: '',
-  priority: '',
-  executors: [],
-  id: '',
+export const taskInitialState: Omit<ITask, 'id'> = {
+  title: '---',
+  status: '1',
+  deadline: '1',
+  priority: '1',
+  executors: '',
 };
 
 @Injectable({ providedIn: 'root' })
-export class TaskService {
+export class BoardTaskService {
   private readonly api = inject(ApiService);
   public readonly status$: BehaviorSubject<LoadingStatus> =
     new BehaviorSubject<LoadingStatus>('init');
   public readonly tasks$: BehaviorSubject<Record<string, ITask>> =
     new BehaviorSubject<Record<string, ITask>>({});
 
-  getTask(id: ITask['id']) {
-    return this.tasks$.value?.[id] || taskInitialState;
+  getCardTask(id: ITask['id']) {
+    const task = this.tasks$.value?.[id] || taskInitialState;
+    return { ...task, executors: task.executors.split(',').slice(0, 5) };
   }
 
   async getTasks(id: ITask['id']) {
@@ -32,6 +32,16 @@ export class TaskService {
       if (ok) this.tasks$.next({ ...this.tasks$.value, [id]: result });
     } finally {
       this.status$.next('loaded');
+    }
+  }
+
+  async updateTask(id: ITask['id'], data: ITask) {
+    try {
+      const { ok, result } = await this.api.taskApi.update(id, data);
+      if (ok) {
+        this.tasks$.next({ ...this.tasks$.value, [id]: result });
+      }
+    } finally {
     }
   }
 }

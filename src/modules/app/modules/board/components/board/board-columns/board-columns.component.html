@@ -56,13 +56,23 @@
               <div class="task" *ngFor="let item of column.tasksIds" cdkDrag>
                 <app-board-column-task-card [taskId]="item">
                   <button
+                    actions
                     type="button"
                     class="navigate"
-                    actions
                     (click)="handleRemoveTask(column.id, item)"
                   >
                     <app-svg-icon name="delete" size="13"></app-svg-icon>
                   </button>
+                  <!-- [routerLink]="'/board/column-task-update/' + item"
+                  queryParamsHandling="merge" -->
+                  <!-- <button
+                    actions
+                    type="button"
+                    class="navigate"
+                    (click)="createDialog.show()"
+                  >
+                    <app-svg-icon name="edit" size="13"></app-svg-icon>
+                  </button> -->
                 </app-board-column-task-card>
               </div>
             </div>

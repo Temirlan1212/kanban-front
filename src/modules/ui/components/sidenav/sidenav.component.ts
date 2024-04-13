@@ -144,15 +144,7 @@ export class SidenavComponent implements OnChanges, OnDestroy {
     });
   }
 
-  handleNavClick(e: any, data: Record<string, any>) {
-    if (data?.['toggle']) {
-      e.stopPropagation();
-      this.sidePanelService.set(
-        !this.sidePanelService.get(data['path']),
-        data['path']
-      );
-    }
-  }
+  handleNavClick(e: any, data: Record<string, any>) {}
 
   protected readonly top = top;
 }

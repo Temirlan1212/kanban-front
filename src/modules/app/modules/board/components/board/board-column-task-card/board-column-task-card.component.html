@@ -12,32 +12,45 @@
   <div class="head">
     <div class="actions">
       <ng-content select="[actions]"></ng-content>
+      <button
+        actions
+        type="button"
+        class="navigate"
+        (click)="updateBoardTaskDialog.show()"
+      >
+        <app-svg-icon name="edit" size="13"></app-svg-icon>
+      </button>
     </div>
 
     <div class="priority">
       <div class="color"></div>
-      <span>important</span>
+      <span>{{ dictionary.getPriorityField(task.priority, "label") }}</span>
     </div>
 
     <div class="status">
       <div class="color"></div>
-      <span>progress</span>
+      <span>{{ dictionary.getStatusField(task.priority, "label") }}</span>
     </div>
   </div>
 
   <div class="content">
-    <h5 class="title">{{ task?.id || "" }}</h5>
+    <h5 class="title">{{ task?.title || "" }}</h5>
   </div>
 
   <div class="footer">
     <div class="executors">
-      <div class="executor">u</div>
-      <div class="executor">u</div>
-      <div class="executor">u</div>
-      <div class="executor">u</div>
-      <div class="executor">u</div>
-      <div class="executor">u</div>
-      <div class="executor">+4</div>
+      <div *ngFor="let id of task.executors" class="executor">
+        {{ dictionary.getExecutorField(id, "label") }}
+      </div>
     </div>
   </div>
 </div>
+
+<app-question-dialog
+  #updateBoardTaskDialog
+  [title]="'Update task' | translate"
+  (submitted)="handleSave(form, updateBoardTaskDialog)"
+  [submitLoading]="actionsLoading"
+>
+  <app-task-form #form [value]="task"></app-task-form>
+</app-question-dialog>

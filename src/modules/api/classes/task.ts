@@ -27,6 +27,19 @@ export class TaskApi {
     );
   }
 
+  async update(id: ITask['id'], data: ITask) {
+    const payload: Omit<ITask, 'id'> = {
+      title: String(data.title),
+      status: String(data.status),
+      deadline: String(data.deadline),
+      priority: String(data.priority),
+      executors: String(data.executors),
+    };
+    return await firstValueFrom(
+      this.http.patch<ApiResponse<ITask>>(`task/${id}`, payload)
+    );
+  }
+
   async delete(id: ITask['id']) {
     return await firstValueFrom(
       this.http.delete<ApiResponse<ITask>>(`task/${id}`)

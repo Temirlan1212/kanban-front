@@ -1,0 +1,70 @@
+<form class="content" [formGroup]="form">
+  <app-form-field name="status" #status>
+    <app-input-select
+      [items]="statuses"
+      formControlName="status"
+      [nameField]="'label'"
+      [placeholder]="'Status' | translate"
+      [required]="status.required"
+    >
+    </app-input-select>
+  </app-form-field>
+
+  <app-form-field name="priority" #priority>
+    <app-input-select
+      [items]="priorities"
+      formControlName="priority"
+      [nameField]="'label'"
+      [placeholder]="'Priority' | translate"
+      [required]="priority.required"
+    >
+    </app-input-select>
+  </app-form-field>
+
+  <app-form-field name="executors" #executors>
+    <app-input-select
+      [items]="executorsList"
+      formControlName="executors"
+      [nameField]="'label'"
+      [placeholder]="'Executors' | translate"
+      [required]="executors.required"
+      [multi]="true"
+    >
+    </app-input-select>
+  </app-form-field>
+  <app-form-field name="title" #title>
+    <app-input
+      type="text"
+      [placeholder]="'title' | translate"
+      formControlName="title"
+      [required]="title.required"
+    >
+    </app-input>
+
+    <span
+      class="field-error"
+      *ngIf="form.get('title')?.getError('error') != null"
+      [textContent]="form.get('title')?.getError('error') | translate"
+    ></span>
+  </app-form-field>
+
+  <app-form-field name="deadline" #deadline>
+    <app-input
+      type="text"
+      [placeholder]="'Deadline' | translate"
+      formControlName="deadline"
+      [required]="deadline.required"
+    >
+    </app-input>
+
+    <span
+      class="field-error"
+      *ngIf="form.get('deadline')?.getError('error') != null"
+      [textContent]="form.get('deadline')?.getError('error') | translate"
+    ></span>
+  </app-form-field>
+
+  <div class="actions">
+    <ng-content select="[actions]"></ng-content>
+  </div>
+</form>
