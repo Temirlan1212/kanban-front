@@ -35,12 +35,9 @@ export class BoardColumnsApi {
     id: IBoardColumns['boardId']
   ) {
     return await firstValueFrom(
-      this.http.patch<ApiResponse<IBoardColumns>>(
-        `board-columns/boardId/${id}`,
-        {
-          columns,
-        }
-      )
+      this.http.put<ApiResponse<IBoardColumns>>(`board-columns/boardId/${id}`, {
+        columns,
+      })
     );
   }
 }

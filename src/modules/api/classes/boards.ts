@@ -31,7 +31,7 @@ export class BoardsApi {
 
   async update(data: IBoard, id: IBoard['id']) {
     return await firstValueFrom(
-      this.http.patch<ApiResponseWithPagination<IBoard>>(`boards/${id}`, {
+      this.http.put<ApiResponseWithPagination<IBoard>>(`boards/${id}`, {
         title: data.title,
       })
     );

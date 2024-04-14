@@ -47,7 +47,7 @@ export class TaskApi {
       executors: String(data.executors),
     };
     return await firstValueFrom(
-      this.http.patch<ApiResponse<ITask>>(`task/${id}`, payload)
+      this.http.put<ApiResponse<ITask>>(`task/${id}`, payload)
     );
   }
 
