@@ -17,6 +17,18 @@ app-skeleton {
   gap: 5px;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0;
+  .title {
+    margin: 0;
+  }
+  .deadline {
+  }
+}
+
 .head {
   display: flex;
   justify-content: space-between;

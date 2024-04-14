@@ -29,12 +29,13 @@
 
     <div class="status">
       <div class="color"></div>
-      <span>{{ dictionary.getStatusField(task.priority, "label") }}</span>
+      <span>{{ dictionary.getStatusField(task.status, "label") }}</span>
     </div>
   </div>
 
   <div class="content">
     <h5 class="title">{{ task?.title || "" }}</h5>
+    <span class="deadline">{{ task?.deadline || "" }}</span>
   </div>
 
   <div class="footer">
