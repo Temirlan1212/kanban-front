@@ -8,5 +8,6 @@ import { SidePanelService } from 'src/modules/ui/services/side-panel.service';
 })
 export class BoardComponent implements OnInit {
   public sidePanelService = inject(SidePanelService);
+
   public ngOnInit(): void {}
 }

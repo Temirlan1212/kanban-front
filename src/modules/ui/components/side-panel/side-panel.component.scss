@@ -4,13 +4,13 @@
   z-index: 500;
 
   @media only screen and (min-width: 992px) {
-    &.collapsed {
-      .panel {
-        position: absolute;
-        left: -100000px;
-        transition: all $sideNavTransitionDelay ease;
-      }
-    }
+    // &.collapsed {
+    //   .panel {
+    //     position: absolute;
+    //     left: -100000px;
+    //     transition: all $sideNavTransitionDelay ease;
+    //   }
+    // }
   }
 }
 

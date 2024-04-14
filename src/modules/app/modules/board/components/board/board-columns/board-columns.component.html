@@ -1,4 +1,6 @@
-<div class="container">
+<div class="container not-found" *ngIf="!activeBoardId">Выберите задачу</div>
+
+<div class="container" *ngIf="activeBoardId">
   <div class="head">
     <button (click)="handleAddColumn()">add column</button>
     <button [class.loading]="(status$ | async) == 'loading'">

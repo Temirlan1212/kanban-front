@@ -9,6 +9,15 @@
   }
 }
 
+.not-found {
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
