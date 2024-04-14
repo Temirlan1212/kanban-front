@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { ApiService } from 'src/modules/api/api.service';
 import { ITask, ServerTimestampt } from 'src/modules/api/models/task.model';
-import { taskInitialState } from '../../modules/app/modules/board/lib/services/board-task.service';
+import { taskInitialState } from '../../../board/lib/services/board-task.service';
 
 @Component({
   selector: 'app-task-list-card',

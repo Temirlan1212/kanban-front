@@ -17,7 +17,7 @@ import { DropDialogComponent } from 'src/modules/ui/components/drop-dialog/drop-
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskComponent } from './task.component';
 import { TaskRoutingModule } from './task-routing.module';
-import { TaskListCardComponent } from '../../../../app/task-list-card/task-list-card.component';
+import { TaskListCardComponent } from './components/task-list-card/task-list-card.component';
 import { PaginatorComponent } from 'src/modules/ui/components/paginator/paginator.component';
 
 @NgModule({

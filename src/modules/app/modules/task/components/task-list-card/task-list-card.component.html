@@ -5,12 +5,22 @@
     </div>
 
     <div class="priority">
-      <div class="color"></div>
+      <div
+        class="color"
+        [style.background-color]="
+          dictionary.getPriorityColorField(task.priority, 'label')
+        "
+      ></div>
       <span>{{ dictionary.getPriorityField(task.priority, "label") }}</span>
     </div>
 
     <div class="status">
-      <div class="color"></div>
+      <div
+        class="color"
+        [style.background-color]="
+          dictionary.getStatusColorField(task.status, 'label')
+        "
+      ></div>
       <span>{{ dictionary.getStatusField(task.priority, "label") }}</span>
     </div>
   </div>

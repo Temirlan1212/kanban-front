@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { TaskPriorityTypes, TaskStatusTypes } from '../models/dictionary.model';
+import {
+  TaskPriorityColorTypes,
+  TaskPriorityTypes,
+  TaskStatusColorTypes,
+  TaskStatusTypes,
+} from '../constants/dictionary.constant';
 
 export class DictionaryApi {
   constructor(private http: HttpClient) {}
@@ -18,6 +23,27 @@ export class DictionaryApi {
       label: TaskPriorityTypes[key as keyof typeof TaskPriorityTypes],
     }));
     return priorities;
+  }
+
+  getPriorityColors() {
+    const priorityColors = Object.keys(TaskPriorityColorTypes).map(
+      (key, index) => ({
+        id: String(index + 1),
+        label:
+          TaskPriorityColorTypes[key as keyof typeof TaskPriorityColorTypes],
+      })
+    );
+    return priorityColors;
+  }
+
+  getStatusColors() {
+    const statusColors = Object.keys(TaskStatusColorTypes).map(
+      (key, index) => ({
+        id: String(index + 1),
+        label: TaskStatusColorTypes[key as keyof typeof TaskStatusColorTypes],
+      })
+    );
+    return statusColors;
   }
 
   getExecutors() {
@@ -39,6 +65,22 @@ export class DictionaryApi {
       label: TaskExecutors[key as keyof typeof TaskExecutors],
     }));
     return executors;
+  }
+
+  getPriorityColorField(id: string, field: 'label' | 'id') {
+    return (
+      this.getPriorityColors().filter((item) => String(item.id) == id)?.[0]?.[
+        field
+      ] || ''
+    );
+  }
+
+  getStatusColorField(id: string, field: 'label' | 'id') {
+    return (
+      this.getStatusColors().filter((item) => String(item.id) == id)?.[0]?.[
+        field
+      ] || ''
+    );
   }
 
   getStatusField(id: string, field: 'label' | 'id') {
